@@ -1,4 +1,4 @@
-let questions = [
+var questions = [
     {
         subject: 'Commonly used data types do not include:',
         choices: ['strings', 'numbers', 'alerts', 'booleans'],
@@ -7,7 +7,7 @@ let questions = [
     {
         subject: 'the condition in an if / else statement is enclosed with ____.',
         choices: ['quotes, ""', 'curly brackets {}', 'parentheses ()', 'square brackets []'],
-        answer: 'quotes ""'
+        answer: 'quotes, ""'
     },
     {
         subject: 'Arrays in Javascript can be used to store ____.',
@@ -22,20 +22,20 @@ let questions = [
 ];
 
 // global vars
-let score = 0;
-let questionIndex = 0;
+var score = 0;
+var questionIndex = 0;
 
-let countdown = document.querySelector('#countdown');
-let timer = document.querySelector('#startBtn');
-let questionsElement = document.querySelector('#questionsElement');
-let wrapper = document.querySelector('#wrapper');
+var countdown = document.querySelector('#countdown');
+var timer = document.querySelector('#startBtn');
+var questionsElement = document.querySelector('#questionsElement');
+var wrapper = document.querySelector('#wrapper');
 
-let seconds = 75;
-let interval = 0;
+var seconds = 75;
+var interval = 0;
 // timer/score penalty
-let penalty = 10;
+var penalty = 10;
 // creates unordered list
-let createList = document.createElement('ul');
+var createList = document.createElement('ul');
 
 
 // start timer on button click / shows display
@@ -57,13 +57,13 @@ timer.addEventListener('click', function() {
 });
 
 function render(questionIndex) {
-    // let userChoices = questions[questionIndex].choices
+    // var userChoices = questions[questionIndex].choices
     // clear data
     questionsElement.innerHTML = '';
     createList.innerHTML = '';
 
     // loops all info in array
-    for (let i = 0; i < questions.length; i++) {
+    for (var i = 0; i < questions.length; i++) {
         var userQuestion = questions[questionIndex].subject;
         var userChoices = questions[questionIndex].choices;
         questionsElement.textContent = userQuestion;
@@ -72,7 +72,7 @@ function render(questionIndex) {
     
         // new el/choice for choices
         userChoices.forEach(function (newItem) {
-            let listItem = document.createElement('li');
+            var listItem = document.createElement('li');
             listItem.textContent = newItem;
             questionsElement.appendChild(createList);
             createList.appendChild(listItem);
@@ -82,19 +82,19 @@ function render(questionIndex) {
 };
 
 function compare(event) {
-    let element = event.target;
+    var element = event.target;
 
     if (element.matches('li')) {
         
-        let createDiv = document.createElement('div');
+        var createDiv = document.createElement('div');
         createDiv.setAttribute('id', 'createDiv');
 
-        //if content of answer is = questions@inded.answer, make div = correct answer
+        //if content of answer is = questions@index.answer, make div = correct answer
         if (element.textContent === questions[questionIndex].answer) {
             score++;
             createDiv.textContent = 'Correct! The answer is ' + questions[questionIndex].answer;
         } else {
-            countdown = countdown - penalty;
+            seconds = seconds - penalty;
             createDiv.textContent = 'Incorrect! The right answer is ' + questions[questionIndex].answer;
         }
     }
@@ -119,21 +119,22 @@ function completed() {
     countdown.innerHTML = '';
 
     // heading
-    let createH1 = document.createElement('h1');
+    var createH1 = document.createElement('h1');
     createH1.setAttribute('id', 'createH1');
     createH1.textContent = 'All Done!'
 
     questionsElement.appendChild(createH1);
 
     // paragraph
-    let createP = document.createElement('p');
+    var createP = document.createElement('p');
     createP.setAttribute('id', 'createP');
 
     questionsElement.appendChild(createP);
 
-    if (countdown >= 0) {
-        let timeRemaining = countdown;
-        let createP2 = document.createElement('p');
+    //time remaining -> score
+    if (seconds >= 0) {
+        var timeRemaining = seconds;
+        var createP2 = document.createElement('p');
         clearInterval(interval);
         createP.textContent = 'Your final score is: ' + timeRemaining;
 
@@ -141,14 +142,14 @@ function completed() {
     }
 
     //label
-    let createLabel = document.createElement('label');
+    var createLabel = document.createElement('label');
     createLabel.setAttribute('id', 'createLabel');
     createLabel.textContent = 'Enter your initials';
     
     questionsElement.appendChild(createLabel);
 
     //input
-    let createInput = document.createElement('input');
+    var createInput = document.createElement('input');
     createInput.setAttribute('type', 'text');
     createInput.setAttribute('id', 'initials');
     createInput.textContent = '';
@@ -156,7 +157,7 @@ function completed() {
     questionsElement.appendChild(createInput);
     
     //submit
-    let createSubmit = document.createElement('button');
+    var createSubmit = document.createElement('button');
     createSubmit.setAttribute('type', 'submit');
     createSubmit.setAttribute('id', 'Submit');
     createSubmit.textContent = 'Submit';
@@ -165,20 +166,20 @@ function completed() {
 
     // get initials store initials + score to local
     createSubmit.addEventListener('click', function() {
-        let initials = createInput.value;
+        var initials = createInput.value;
 
         if (initials === null) {
             console.log('No value entered')
-            createInput.value = 'Anonymous';
+            // createInput.value = 'Anonymous';
 
         } else {
-            let finalScore = {
+            var finalScore = {
                 initials: initials,
                 score: timeRemaining
-            };
+            }
             console.log(finalScore);
 
-            let allScores = localStorage.getItem(allScores);
+            var allScores = localStorage.getItem('allScores');
             if (allScores === null) {
                 allScores = [];
             } else {
@@ -186,10 +187,10 @@ function completed() {
             }
 
             allScores.push(finalScore);
-            let newScore = JSON.stringify(allScores);
+            var newScore = JSON.stringify(allScores);
             localStorage.setItem('allScores', newScore);
 
-            location.replace('./HighScores.html')
+            window.location.replace('./HighScores.html')
         }
     });
 };
