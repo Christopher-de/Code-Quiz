@@ -18,3 +18,5 @@ Upon button click for submit, user score is logged in highscore list.
 
 ## Deplyed Website
 https://christopher-de.github.io/code-quiz/
+![image](https://user-images.githubusercontent.com/84211810/125447839-76694895-af72-4adf-aa02-eef7421a7bcd.png)
+
