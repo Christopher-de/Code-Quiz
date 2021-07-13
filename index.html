@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <title>Javascript Code Quiz</title>
+</head>
+<body>
+    <main>
+        <a id="HSbutton" href="HighScores.html">View Highscores</a>
+
+        <div id="wrapper">
+        <!-- timer div -->
+            <div id="countdown"></div>
+
+            <!-- questions/content -->
+            <section id="questionsElement">
+                <h1>Coding Quiz Challenge</h1>
+
+                <p class="description">
+                    Try to answer all of the following questions within the time limit. Wrong answers will reduce your available time and give a small score penalty. Make sure to keep this in mind as you take the quiz!
+                </p>
+
+                <!-- empty ul for js -->
+                <ul id="quizChoiceUl"></ul>
+
+                <!-- button(s) -->
+                <button id="startBtn">Start Quiz</button>
+            </section>
+        </div>
+    </main>
+
+    
+    
+    <script src="./assets/js/questions.js"></script>
+</body>
+</html>
